@@ -2677,7 +2677,7 @@ Who needs to see this today? Share it with them 💛
     if(!ON){ return; }
     try{ if(localStorage.getItem('goodie-owner')==='1') return; }catch(e){}
     if(!FREE.has(type) && consent()!=='yes') return;
-    try{ fetch(NOTIFY_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),keepalive:true}).catch(function(){}); }catch(e){}
+    try{ fetch(NOTIFY_URL,{method:'POST',mode:'no-cors',body:new URLSearchParams({p:JSON.stringify(body)}),keepalive:true}).catch(function(){}); }catch(e){}
   };
   const N = window.gNotify;
   window.gVisit = function(){ try{ if(!sessionStorage.getItem('goodie-pv')){ sessionStorage.setItem('goodie-pv','1'); N('page_visit'); } }catch(e){ N('page_visit'); } };
