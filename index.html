@@ -2677,7 +2677,7 @@ Who needs to see this today? Share it with them 💛
     if(!ON){ return; }
     try{ if(localStorage.getItem('goodie-owner')==='1') return; }catch(e){}
     if(!FREE.has(type) && consent()!=='yes') return;
-    try{ fetch(NOTIFY_URL,{method:'POST',mode:'no-cors',body:new URLSearchParams({p:JSON.stringify(body)}),keepalive:true}).catch(function(){}); }catch(e){}
+    try{ fetch(NOTIFY_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),keepalive:true}).catch(function(){}); }catch(e){}
   };
   const N = window.gNotify;
   window.gVisit = function(){ try{ if(!sessionStorage.getItem('goodie-pv')){ sessionStorage.setItem('goodie-pv','1'); N('page_visit'); } }catch(e){ N('page_visit'); } };
@@ -2959,7 +2959,7 @@ Who needs to see this today? Share it with them 💛
     const CFG = {
       // Paste an n8n / backend webhook URL here to connect a real AI model (see notes).
       // Leave empty to run on the built-in knowledge base only.
-      webhookUrl: "",
+      webhookUrl: "https://goodie0120.app.n8n.cloud/webhook/goodie-site-chat",
       storageKey: "goodie-chat-v1",
       maxHistory: 60
     };
@@ -3108,6 +3108,72 @@ Who needs to see this today? Share it with them 💛
         a:"The first step is a conversation about your goals, challenges, and how Goodie can best support your growth. You can "+LINKS.book+" and pick a time that works for you. No pressure, no pitch.",
         chips:["What do you do?","Tell me about the free offer"] },
 
+
+      /* ===== Added knowledge: deeper skills, general tips, privacy guards ===== */
+      { id:"strategy-deep", kw:["content bible","ideal customer avatar","ideal customer","ica","brand voice","content pillars","audience research","messaging","positioning"],
+        a:"Before any posting, Goodie works out who you help and what to say. He builds an <strong>Ideal Customer Avatar</strong>, which is a clear picture of your best client. Then he builds a <strong>Content Bible</strong>: a plan that matches your messages, content pillars and post ideas to each step of your customer's journey. A content calendar comes next, so you never start from a blank page.",
+        chips:["What services do you offer?","Tell me about the free offer"] },
+
+      { id:"automation-tools", kw:["manychat","mailerlite","dm automation","auto reply","autoresponder","lead magnet","comment keyword","notion","google sheets","spreadsheet automation"],
+        a:"Goodie sets up DM automations with ManyChat, so a person who comments a keyword gets a reply and a free guide. He connects the freebie to an email list in MailerLite and builds simple landing pages. He also builds n8n workflows, for example one that turns a Content Bible into weekly post ideas saved to Notion and a spreadsheet.",
+        chips:["Tell me about AI automation","How do I book a call?"] },
+
+      { id:"repurpose", kw:["repurpose","repurposing","old content","existing content","reuse my content","recycle content","already have content","lots of posts"],
+        a:"If you already have lots of posts, you do not need to start over. Goodie re-edits your best old posts with new hooks, captions, on-screen text and covers, then turns them into Reels and carousels. You get fresh content without creating from scratch.",
+        chips:["What services do you offer?","How do I book a call?"] },
+
+      { id:"pinterest-results", kw:["pinterest growth","pinterest results","pinterest views","pinterest strategy","how does pinterest work","pin","pins","monthly views"],
+        a:"On Pinterest, Goodie ran a fashion and beauty brand from start to finish: strategy, content, pin copy and daily posting across two topics. The account reached about <strong>1.3M monthly views with only 65 followers</strong>. Pinterest shows pins to people who search, not only to followers, so a small account can still get big reach.",
+        chips:["Show me your work","How do I book a call?"] },
+
+      { id:"linkedin-content", kw:["linkedin content","linkedin posts","linkedin strategy","thought leadership","personal brand"],
+        a:"For LinkedIn, Goodie helps you share what you know and your story in a way that teaches people and builds trust. He plans posts around a few clear post types so ideas never run out, and he writes in your own voice.",
+        chips:["What platforms do you use?","How do I book a call?"] },
+
+      { id:"community", kw:["community management","community manager","reply to comments","replying to comments","moderate","moderation","community building"],
+        a:"Goodie answers comments and DMs in the hours you agree on, keeps the tone on brand, and uses simple reply scripts to turn chats into leads. He also notes the questions your audience asks most, so they can become future content.",
+        chips:["Tell me about the DM playbook","How do I book a call?"] },
+
+      { id:"niches", kw:["which industries","what industries","what niches","industry experience","health coach","hypnotherapist","hypnotherapy","therapist","skincare","fashion brand","gym"],
+        a:"Goodie's main focus is ADHD and wellness coaches. He has also worked with therapy and hypnotherapy practitioners, health coaches, fitness brands, skincare, and fashion and beauty brands. Tell me your niche and I will tell you how he would approach it.",
+        chips:["Show me your work","How do I book a call?"] },
+
+      { id:"fintech", kw:["crypto","fintech","bitcoin","blockchain","trading","investment","investing","forex","defi","web3","compliance"],
+        a:"Goodie knows social media and content. He is not a compliance or investment expert, and nothing here is financial advice. For a fintech or crypto brand, he can help with simple, clear content that explains things and builds trust. A short call will show if it is a good fit.",
+        chips:["How do I book a call?","What services do you offer?"] },
+
+      { id:"clients-private", kw:["who are your clients","your clients","client list","other clients","past clients","client names","who have you worked with","which clients","name your clients","current clients"],
+        a:"Goodie keeps client details private unless the client has agreed to share them. You can see real examples in the "+LINKS.work+" section, and he can talk about experience that fits your niche on a call.",
+        chips:["Show me your work","How do I book a call?"] },
+
+      { id:"private", kw:["how old","your age","his age","home address","married","girlfriend","wife","husband","family","salary","how much do you earn","income","net worth","religion","political","politics","password","bank details","bank account","card number","passport","id number","bvn","nin"],
+        a:"I keep personal details private, so I can't help with that one. I can tell you about Goodie's work, his services, or how to book a call.",
+        chips:["What services do you offer?","How do I book a call?"] },
+
+      { id:"tip-hooks", kw:["what is a hook","good hook","write a hook","hook ideas","how to write hooks","how to write a hook"],
+        a:"A hook is your first line, or the first two seconds of a video. It tells people why they should stay. Three easy types: a clear result ('How I got X without Y'), a mistake ('Stop doing this if you want more clients'), or a question your client asks every day. Keep it short and about them, not you.",
+        chips:["I post but get no views","Tell me about the free offer"] },
+
+      { id:"tip-frequency", kw:["how often should i post","how often to post","posting frequency","how many times a week","how many posts","how many times should i post"],
+        a:"For most small brands, 3 to 5 good posts a week beats posting every day with low effort. Pick a pace you can keep for 90 days. Being consistent matters more than posting a lot.",
+        chips:["How do I grow without living on social media?","How do I book a call?"] },
+
+      { id:"tip-hashtags", kw:["hashtag","hashtags","how many hashtags"],
+        a:"Use a few, about 3 to 5, that match your topic and your buyer. Hashtags help less than a clear topic, a strong first line, and keywords in your caption and bio.",
+        chips:["What is a hook?","Tell me about the free offer"] },
+
+      { id:"tip-besttime", kw:["best time to post","when to post","what time should i post","best day to post"],
+        a:"There is no one best time. Check your own insights to see when your audience is online, test two or three time slots for a few weeks, and keep the one that wins.",
+        chips:["How often should I post?","How do I book a call?"] },
+
+      { id:"tip-format", kw:["reels or carousels","carousel vs reel","reels vs carousels","which format","carousel","carousels","reel or carousel"],
+        a:"Reels help new people find you. Carousels and text posts build trust and get saved. Mix both: Reels to be found, carousels to teach and convert.",
+        chips:["What is a hook?","Tell me about the free offer"] },
+
+      { id:"tip-start", kw:["where do i start","where should i start","i am new","beginner","just starting","new to social media","starting out"],
+        a:"Start with three things: who you help, what you help them with, and one platform. Fix your bio, post 3 times a week, and talk to people in comments and DMs. The free <strong>Content &amp; Profile Audit</strong> shows what to fix first. Claim it in the "+LINKS.free+" section.",
+        chips:["Tell me about the free offer","How do I book a call?"] },
+
       { id:"thanks", kw:["thanks","thank you","thx","appreciate","cheers","great","awesome","perfect"],
         a:"You're welcome! Anything else you'd like to know?",
         chips:["How do I book a call?","Tell me about the free offer"] },
@@ -3161,11 +3227,12 @@ Who needs to see this today? Share it with them 💛
     function plain(html){ const d = document.createElement('div'); d.innerHTML = html; return d.textContent.replace(/\s+/g,' ').trim(); }
 
     // ---------------- state (saved in the visitor's browser) ----------------
-    const blank = () => ({ sid: 's' + Math.random().toString(36).slice(2,10) + Date.now().toString(36), name:'', email:'', history:[], unanswered:[] });
+    const blank = () => ({ sid: 's' + Math.random().toString(36).slice(2,10) + Date.now().toString(36), name:'', email:'', history:[], unanswered:[], topics:[] });
     let S;
     try{ S = Object.assign(blank(), JSON.parse(localStorage.getItem(CFG.storageKey) || '{}')); }catch(e){ S = blank(); }
     if(!Array.isArray(S.history)) S.history = [];
     if(!Array.isArray(S.unanswered)) S.unanswered = [];
+    if(!Array.isArray(S.topics)) S.topics = [];
     function save(){
       S.history = S.history.slice(-CFG.maxHistory);
       S.unanswered = S.unanswered.slice(-30);
@@ -3183,9 +3250,9 @@ Who needs to see this today? Share it with them 💛
     async function askBackend(text){
       const ctl = new AbortController(); const to = setTimeout(()=>ctl.abort(), 12000);
       try{
-        const hist = S.history.slice(-10).map(m => ({ role: m.r === 'user' ? 'user' : 'assistant', text: m.id ? plain(answerHtml(m.id, S) || '') : (m.t || '') }));
+        const hist = S.history.slice(-24).map(m => ({ role: m.r === 'user' ? 'user' : 'assistant', text: m.id ? plain(answerHtml(m.id, S) || '') : (m.t || '') }));
         const res = await fetch(CFG.webhookUrl, { method:'POST', headers:{'Content-Type':'application/json'}, signal: ctl.signal,
-          body: JSON.stringify({ type:'message', sessionId:S.sid, message:text, history:hist, visitor:{name:S.name,email:S.email}, page:location.href }) });
+          body: JSON.stringify({ type:'message', sessionId:S.sid, message:text, history:hist, visitor:{name:S.name,email:S.email}, memory:{ topics:S.topics.slice(-10) }, page:location.href }) });
         if(!res.ok) throw new Error('bad status');
         const data = await res.json();
         const reply = data.reply || data.output || data.text;
@@ -3293,7 +3360,7 @@ Who needs to see this today? Share it with them 💛
         await wait(delay);
         typing(false);
         const hit = match(text);
-        if(hit){ botSay(hit.id); }
+        if(hit){ S.topics.push(hit.id); S.topics = S.topics.slice(-20); botSay(hit.id); }
         else {
           S.unanswered.push({ q:text, at:new Date().toISOString() }); save();
           hook({ type:'unanswered', message:text });
